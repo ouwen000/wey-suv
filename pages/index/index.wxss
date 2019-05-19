@@ -1,0 +1,186 @@
+/**index.wxss**/
+
+.topnav{
+    position: fixed;
+    top: 30%;
+    right:0;
+    z-index:99;
+    background: rgb(14, 118, 221);
+    color: #fff;
+    font-size: 12px;
+    width:12px;
+    padding: 5px 5px 5px 5px;
+    text-align: right;
+    
+}
+
+.to-top{
+  position: absolute;
+  width: 6vw;
+  height: 6vw;
+  left: 8vw;
+  top: -8vh;
+}
+
+
+
+.cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll_box{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-container{
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.controller-container{
+  display: flex;
+  flex-direction: column;
+  /*align-items: center;*/
+  justify-content: center;
+  width: 100%;
+  height: 540px;
+  background-image: url('https://img.wenfree.cn/wey/bg-bottom.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.input-container{
+  left: 15%;
+  margin: 10px 10px;
+  width: 300;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.input{
+  background-color: none;
+  height: 25px;
+  width: 75%;
+  border: white;
+  border-style: solid;
+  border-width: 1px;
+  color: grey;
+  padding: 2px 5px 2px 15px;
+  font-size: 12px;
+}
+
+.label{
+  text-align: center;
+  vertical-align: middle;
+  color: white;
+}
+
+.checkbox{
+  width: 300px;
+  font-size: 14px;
+  color: white;
+  margin: 0 auto;
+}
+
+.rule-desc{
+  margin-left: 5px;
+  width: 120px;
+  color: #2e61a2;
+}
+
+.button{
+  width: 200px;
+  background-color:#2e61a2;
+  border-radius: 0;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.common-img{
+  width: 100%;
+  height: 100%;
+}
+
+.box-mun-1,
+.box-mun-3,.box-mun-6 {
+  height: 20vh !important;
+}
+.box-mun-2,.controller-container{
+  height: 80vh !important;
+}
+.box-mun-4,
+.box-mun-5{
+  height: 40vh !important;
+}
+.swiper{
+  height: 40vh !important;
+}
+
+.video {
+  position: absolute;
+  width: 96vw;
+  height: 54vw;
+  top: 230vw;
+}
+
+.video-box {
+  position: absolute;
+  width: 92vw;
+  left: 4vw;
+  height: 225px;
+  top: 2vh;
+}
+.video-box video{
+  width: 100%;
+}
+
+
+.swiper {
+  width: 100%;
+}
+
+.law-text-container{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: black;
+  overflow: hidden;
+  z-index: 999;
+}
+
+.law-text-view{
+  position: absolute;
+  top: 0px;
+  left: 3%;
+  width: 94%;
+  height: 100%;
+  color: white;
+  font-size: 12px;
+  overflow-y:auto;
+  overflow-x:scroll;
+}
+
+.close{
+  position: absolute;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 5px;
+  height: 40px;
+  width: 40px;
+  border-radius: 40px;
+  background-color: white;
+}

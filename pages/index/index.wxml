@@ -1,0 +1,68 @@
+<!--index.wxml-->
+<!-- <view style="width:100%;height: 100%;" scroll-y="true" bindscroll="scrollTopFun"> 
+  <view class="{{ scrollTop > 5 ? 'topnone' : 'topnav'}}"> 
+  关注实时动态一▼
+  </view> 
+</view> -->
+<view class="scroll_box">
+  <scroll-view class='cover' scrollX="true">
+    <block wx:key="{{index}}" wx:for="{{pageInfos}}">
+
+      <view wx:if="{{!item.extra || item.extra.length==0}}" class="main-container box-mun-{{ index }}"   style='height:{{windowHeight}}px'>
+        <image wx:if="{{!item.swiper}}" src="{{item.url}}" mode="scaleToFill" class="common-img"></image>
+        
+          <view wx:if="{{!item.swiper&&item.video}}" class="video-box" >
+          <video 
+            wx:if="{{!item.swiper&&item.video}}" 
+ 
+            src="{{item.video}}" 
+            controls = "true"
+            object-fit="contain" 
+            
+            show-fullscreen-btn="true"
+
+            >
+            </video>
+          </view>
+
+        <swiper wx:if="{{item.swiper}}" indicator-dots="{{true}}" indicator-color="#ffffff" autoplay="true" circular="true" 
+        
+        class="swiper"
+        style="height:73vw;background-color: rgba(0,0,0,1)"
+        >
+
+
+          <block wx:for="{{item.url}}" wx:key="row" wx:for-item="banner">
+            <swiper-item style="height:73vw;">
+              <image src="{{banner}}" mode="widthFix" class="common-img"/>
+            </swiper-item> 
+          </block>
+        </swiper>
+      </view>
+      <view wx:if="{{item.extra.length>0}}" class="controller-container" style="height:{{windowHeight}}px;">
+        <image class="to-top" src="https://img.wenfree.cn/wey/top-icon.png" bindtap="onTop"></image>
+        <block wx:key="{{n}}" wx:for-item="info" wx:for="{{item.extra}}">
+          <view class="input-container">
+            <label wx:if="{{info.type!='button' && info.type!='checkbox'}}" class="label">{{info.label}}</label>
+            <input wx:if="{{info.type=='text'}}" placeholder="{{info.placeholder}}" class="input" bindinput="onInput" data-name="{{info.data}}"/>
+            <button wx:if="{{info.type=='button'}}" class="button" bindtap="onSubmit">{{info.label}}</button>
+            <view wx:if="{{info.type=='checkbox'}}" class="checkbox" bindtap="onCheck" data-name="{{info.data}}">
+              <checkbox checked="{{apply}}">{{info.label}}<text class="rule-desc" bindtap="OnShowLawDesc">{{info.label2}}</text></checkbox>
+            </view>
+            <picker wx:if="{{info.type=='picker' && info.label=='性别'}}" value="{{selGender}}" range="{{gender}}" class="input" bindchange="onPick" data-name="{{info.data}}">{{genderText}}</picker>
+            <picker wx:if="{{info.type=='picker' && info.label=='省份'}}" value="{{selProv}}" range="{{provinces}}" class="input" bindchange="onPick" data-name="{{info.data}}">{{provText}}</picker>
+            <picker wx:if="{{info.type=='picker' && info.label=='城市'}}" value="{{selCity}}" range="{{citys}}" class="input" bindchange="onPick" data-name="{{info.data}}">{{cityText}}</picker>
+            <picker wx:if="{{info.type=='picker' && info.label=='经销商'}}" value="{{selSsss}}" range="{{shops}}" class="input" bindchange="onPick" data-name="{{info.data}}">{{ssss}}</picker>
+          </view>
+        </block>
+      </view>
+    </block>
+  </scroll-view>
+</view>
+<view hidden="{{hideLawDesc}}" class="law-text-container" style="height:{{windowHeight}}px;">
+  <view class="close" style="left:{{windowWidth/2-20}}px;" bindtap="OnShowLawDesc">X</view>
+  <scroll-view class="law-text-view" style="height:{{windowHeight-60}}px;" scroll-y="true">
+    <!--<text class="law-text-view">{{lawText}}</text>-->
+    <image src="https://img.wenfree.cn/wey/法律声明.png" mode="widthFix" class="common-img"></image>
+  </scroll-view>
+</view>
