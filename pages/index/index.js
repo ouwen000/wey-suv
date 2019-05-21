@@ -11,6 +11,7 @@ Page({
     provinces: [],
     citys: [],
     shops: [],
+    shopsId: [],
     windowHeight: 0,
     windowWidth: 0,
     lawText: '',
@@ -27,9 +28,20 @@ Page({
     provText: '请选择',// 省份
     cityText: '请选择',// 城市
     ssss: '请选择',// 经销商
+    ssssid : "",// 经销商id
     apply: true,// 同意法律声明
   },
   onLoad: function () {
+    //定位
+    // wx.getLocation({
+    //   type: 'wgs84',
+    //   success(res) {
+    //     const latitude = res.latitude
+    //     const longitude = res.longitude
+    //     const speed = res.speed
+    //     const accuracy = res.accuracy
+    //   }
+    // });
     console.log('onload');
     var self = this;
     var sysInfo = wx.getSystemInfoSync();
@@ -46,6 +58,7 @@ Page({
       url: extra.apiUrls[0],
       method: 'get',
       success: function(res){
+        console.log("省", res);
         var provinces = [];
         for (var i in res.data) {
           provinces.push(res.data[i].sh_province);
@@ -55,7 +68,7 @@ Page({
           url: extra.apiUrls[1] + provinces[0],
           method: 'get',
           success: function(res){
-            console.log(res);
+            console.log("城市",res);
             var citys = [];
             for(var i in res.data){
               citys.push(res.data[i].sh_city);
@@ -65,12 +78,15 @@ Page({
               url: extra.apiUrls[2] + citys[0],
               method: 'get',
               success: function(res){
-                console.log(res);
+                console.log("经销商",res);
                 var shops = [];
+                var shopsId = [];
                 for (var i in res.data) {
                   shops.push(res.data[i].sh_serviceStoreName);
+                  shopsId.push(res.data[i].sh_number);
                 }
                 self.setData({shops: shops});
+                self.setData({shopsId: shopsId});
               },
               fail: function(err){
                 wx.showToast({
@@ -93,8 +109,9 @@ Page({
           title: '获取省份信息失败！',
           icon: 'none'
         });
-      }
+      },
     });
+    // 查询用ip
   },
   OnShowLawDesc: function(e){
     this.setData({ hideLawDesc: !this.data.hideLawDesc});
@@ -129,10 +146,13 @@ Page({
             success: function (res) {
               console.log(res);
               var shops = [];
+              var shopsId = [];
               for (var i in res.data) {
                 shops.push(res.data[i].sh_serviceStoreName);
+                shopsId.push(res.data[i].sh_number);
               }
               self.setData({ shops: shops });
+              self.setData({ shopsId: shopsId });
             },
             fail: function (err) {
               wx.showToast({
@@ -158,10 +178,13 @@ Page({
         success: function (res) {
           console.log(res);
           var shops = [];
+          var shopsId = [];
           for (var i in res.data) {
             shops.push(res.data[i].sh_serviceStoreName);
+            shopsId.push(res.data[i].sh_number);
           }
           self.setData({ shops: shops });
+          self.setData({ shopsId: shopsId });
         },
         fail: function (err) {
           wx.showToast({
@@ -171,13 +194,16 @@ Page({
         }
       });
     }
-    if(name=='selGender'){
+    if(name == 'selGender'){
       this.setData({ genderText: this.data.gender[value] });
     }
     if (name == 'selSsss') {
+      console.log("--------------------------");
+      console.log(value);
       this.setData({ ssss: this.data.shops[value] });
+      this.setData({ ssssid: this.data.shopsId[value] });
     }
-    console.log(e, name, value);
+    console.log("c", e, name, value, this.data.ssssid);
   },
   onCheck: function(e){
     this.setData({apply: !this.data.apply});
@@ -185,7 +211,8 @@ Page({
   },
   onSubmit: function(e){
     var params = {
-      ssss: this.data.ssss,
+      ssss: this.data.ssssid,
+      ssssname: this.data.ssss,
       name: this.data.name,
       phone: this.data.phone,
       gender: this.data.genderText,
@@ -245,7 +272,7 @@ Page({
         //给scrollTop重新赋值    
         wx.pageScrollTo({
           //翻动到第一页
-          scrollTop: wx.getSystemInfoSync().windowHeight
+          // scrollTop: wx.getSystemInfoSync().windowHeight
         })
       }
     } else {
@@ -260,4 +287,18 @@ Page({
       scrollTop: 0
     })
   },
+
+  // 转发
+  onShareAppMessage(res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: 'WEYSUV预约试驾',
+      path: '/pages/index/index',
+      imageUrl: 'https://img.wenfree.cn/wey/share_img.jpg'
+    }
+  },
+
 })

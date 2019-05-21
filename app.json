@@ -2,6 +2,11 @@
   "pages": [
     "pages/index/index"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置将用于更好的选对经销商"
+    }
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
