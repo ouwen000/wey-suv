@@ -38,7 +38,7 @@ var region = {
 var infos = [
   { url: 'https://img.wenfree.cn/wey/wey_home.jpg', },
   { url: 'https://img.wenfree.cn/wey/1080B_02.jpg', },
-  { url: 'https://img.wenfree.cn/wey/bg-top.jpg', video: 'https://img.wenfree.cn/wey/wey_2.mp4'},
+  { url: 'https://img.wenfree.cn/wey/bg-top.jpg', video: 'https://img.wenfree.cn/wey/wey_2.mp4' }, 
   { url: 'https://img.wenfree.cn/wey/1080B_04.jpg',},
   {
     url: [
