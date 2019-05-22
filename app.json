@@ -4,7 +4,7 @@
   ],
   "permission": {
     "scope.userLocation": {
-      "desc": "你的位置将用于更好的选对经销商"
+      "desc": "您的位置将用于更好的选择经销商"
     }
   },
   "window": {
