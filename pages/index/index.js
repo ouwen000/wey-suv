@@ -30,24 +30,30 @@ Page({
     ssss: '请选择',// 经销商
     ssssid : "",// 经销商id
     apply: true,// 同意法律声明
+
+    // 图片更新信息
+    now:Date.now(),
+    imgUrl:'https://wenfree.cn/api/Public/idfa_xianyu/?service=Wey.Img'
   },
   onLoad: function () {
-    //定位
-    // wx.getLocation({
-    //   type: 'wgs84',
-    //   success(res) {
-    //     const latitude = res.latitude
-    //     const longitude = res.longitude
-    //     const speed = res.speed
-    //     const accuracy = res.accuracy
-    //   }
-    // });
+    //第一时间读出图片信息
+    console.log(this.data.imgUrl)
+    var self = this;
+    wx.request({
+      url: this.data.imgUrl,
+      method: 'get',
+      success: function (res) {
+        console.log("取到图片数据",res.data.data)
+        self.setData({ pageInfos: res.data.data });
+      },
+    }),
+
     console.log('onload');
     var self = this;
     var sysInfo = wx.getSystemInfoSync();
     console.log(sysInfo);
     this.setData({ 
-      pageInfos: extra.dataInfos, 
+      // pageInfos: extra.dataInfos, 
       gender: extra.gender, 
       windowHeight: sysInfo.windowHeight,
       windowWidth: sysInfo.windowWidth,
@@ -264,27 +270,54 @@ Page({
   onPageScroll: function (e) {
     //console.log(e)
     var that = this
+    console.log('当前存储的scrollTop->', that.data.scrollTop);
     var scrollTop = e.scrollTop
+//当滚动的top值最大或者最小时，为什么要做这一步是由于在手机实测小程序的时候会发生滚动条回弹，所以为了解决回弹，设置默认最大最小值   
+    if (e.scrollTop <= 0) {
+      e.scrollTop = 0;
+    }
 
     if (e.scrollTop > this.data.scrollTop || e.scrollTop == wx.getSystemInfoSync().windowHeight) {
       console.log('向下滚动');
-      if (e.scrollTop >= 20 && e.scrollTop <= wx.getSystemInfoSync().windowHeight ){
-        //给scrollTop重新赋值    
-        wx.pageScrollTo({
-          //翻动到第一页
-          // scrollTop: wx.getSystemInfoSync().windowHeight
-        })
-      }
+      // console.log('向下滚动->', scrollTop);
+      // if (scrollTop - that.data.scrollTop > 50 && scrollTop - that.data.scrollTop < 52 ){
+      //   console.log('下滑一页');
+      //   this.upPage();
+      // }
+
     } else {
       console.log('向上滚动');
+      // console.log('向上滚动->', scrollTop);
+      // console.log('差值->', scrollTop - that.data.scrollTop);
+      // if (scrollTop - that.data.scrollTop < -50 && scrollTop - that.data.scrollTop > -52 ) {
+      //   console.log('上滑一页');
+      //   this.upDown();
+      // }
     }
+  },
+  // 上滑一页
+  upPage: function (e){
+    //给scrollTop重新赋值   
+    var new_scrollTop = this.data.scrollTop + this.data.windowHeight
+    wx.pageScrollTo({
+      scrollTop: new_scrollTop
+    })
+    this.setData({ scrollTop: new_scrollTop });
+  },
+  // 下滑一页
+  upDown: function () {
+    var new_scrollTop = this.data.scrollTop - this.data.windowHeight
+    wx.pageScrollTo({
+      scrollTop: new_scrollTop
+    })
+    this.setData({ scrollTop: new_scrollTop });
   },
 
   // 滚动到顶部
   onTop: function () {
     // 控制滚动
     wx.pageScrollTo({
-      scrollTop: 0
+      scrollTop: wx.getSystemInfoSync().windowHeight*2*0
     })
   },
 

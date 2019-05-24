@@ -139,7 +139,7 @@
   width: 92vw;
   left: 4vw;
   height: 225px;
-  top: 2vh;
+  top: 6vh;
 }
 .video-box video{
   width: 100%;

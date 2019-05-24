@@ -9,7 +9,7 @@
     <block wx:key="{{index}}" wx:for="{{pageInfos}}">
 
       <view wx:if="{{!item.extra || item.extra.length==0}}" class="main-container box-mun-{{ index }}"   style='height:{{windowHeight}}px'>
-        <image wx:if="{{!item.swiper}}" src="{{item.url}}" mode="scaleToFill" class="common-img"></image>
+        <image wx:if="{{!item.swiper}}" src="{{item.url}}?{{now}}" mode="scaleToFill" class="common-img"></image>
         
           <view wx:if="{{!item.swiper&&item.video}}" class="video-box" >
           <video 
@@ -34,13 +34,13 @@
 
           <block wx:for="{{item.url}}" wx:key="row" wx:for-item="banner">
             <swiper-item style="height:73vw;">
-              <image src="{{banner}}" mode="widthFix" class="common-img"/>
+              <image src="{{banner}}?{{now}}" mode="widthFix" class="common-img"/>
             </swiper-item> 
           </block>
         </swiper>
       </view>
       <view wx:if="{{item.extra.length>0}}" class="controller-container" style="height:{{windowHeight}}px;">
-        <image class="to-top" src="https://img.wenfree.cn/wey/top-icon.png" bindtap="onTop"></image>
+        <image class="to-top" src="https://img.wenfree.cn/wey/top-icon.png?{{now}}" bindtap="onTop"></image>
         <block wx:key="{{n}}" wx:for-item="info" wx:for="{{item.extra}}">
           <view class="input-container">
             <label wx:if="{{info.type!='button' && info.type!='checkbox'}}" class="label">{{info.label}}</label>
@@ -63,6 +63,6 @@
   <view class="close" style="left:{{windowWidth/2-20}}px;" bindtap="OnShowLawDesc">X</view>
   <scroll-view class="law-text-view" style="height:{{windowHeight-60}}px;" scroll-y="true">
     <!--<text class="law-text-view">{{lawText}}</text>-->
-    <image src="https://img.wenfree.cn/wey/法律声明.png" mode="widthFix" class="common-img"></image>
+    <image src="https://img.wenfree.cn/wey/法律声明.png?{{now}}" mode="widthFix" class="common-img"></image>
   </scroll-view>
 </view>
