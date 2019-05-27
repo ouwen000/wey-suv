@@ -42,9 +42,9 @@ var infos = [
   { url: 'https://img.wenfree.cn/wey/1080B_04.jpg',},
   {
     url: [
-      'https://img.wenfree.cn/wey/hdt1.jpg',
-      'https://img.wenfree.cn/wey/ht2.jpg',
-      'https://img.wenfree.cn/wey/ht3.jpg'
+      'https://img.wenfree.cn/wey/top_silder_01.png',
+      'https://img.wenfree.cn/wey/top_silder_02.png',
+      'https://img.wenfree.cn/wey/top_silder_03.png'
       ], swiper: 'true' },
   { 
     url: [

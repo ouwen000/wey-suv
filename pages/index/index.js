@@ -46,6 +46,11 @@ Page({
         console.log("取到图片数据",res.data.data)
         self.setData({ pageInfos: res.data.data });
       },
+      fail: function (err) {
+        self.setData({ 
+          pageInfos: extra.dataInfos,
+        })
+      }
     }),
 
     console.log('onload');
