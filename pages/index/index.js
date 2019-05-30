@@ -31,6 +31,14 @@ Page({
     ssssid : "",// 经销商id
     apply: true,// 同意法律声明
 
+    //  这个是拟滑块
+    scrollindex: 0,  //当前页面的索引值
+    totalnum: 4,  //总共页面数
+    starty: 0,  //开始的位置x
+    endy: 0, //结束的位置y
+    critical: 100, //触发翻页的临界值
+    margintop: 0,  //滑动下拉距离
+
     // 图片更新信息
     now:Date.now(),
     imgUrl:'https://wenfree.cn/api/Public/idfa_xianyu/?service=Wey.Img'
@@ -271,53 +279,7 @@ Page({
       },
     });
   },
-  // 监听滚动条坐标
-  onPageScroll: function (e) {
-    //console.log(e)
-    var that = this
-    console.log('当前存储的scrollTop->', that.data.scrollTop);
-    var scrollTop = e.scrollTop
-//当滚动的top值最大或者最小时，为什么要做这一步是由于在手机实测小程序的时候会发生滚动条回弹，所以为了解决回弹，设置默认最大最小值   
-    if (e.scrollTop <= 0) {
-      e.scrollTop = 0;
-    }
-
-    if (e.scrollTop > this.data.scrollTop || e.scrollTop == wx.getSystemInfoSync().windowHeight) {
-      console.log('向下滚动');
-      // console.log('向下滚动->', scrollTop);
-      // if (scrollTop - that.data.scrollTop > 50 && scrollTop - that.data.scrollTop < 52 ){
-      //   console.log('下滑一页');
-      //   this.upPage();
-      // }
-
-    } else {
-      console.log('向上滚动');
-      // console.log('向上滚动->', scrollTop);
-      // console.log('差值->', scrollTop - that.data.scrollTop);
-      // if (scrollTop - that.data.scrollTop < -50 && scrollTop - that.data.scrollTop > -52 ) {
-      //   console.log('上滑一页');
-      //   this.upDown();
-      // }
-    }
-  },
-  // 上滑一页
-  upPage: function (e){
-    //给scrollTop重新赋值   
-    var new_scrollTop = this.data.scrollTop + this.data.windowHeight
-    wx.pageScrollTo({
-      scrollTop: new_scrollTop
-    })
-    this.setData({ scrollTop: new_scrollTop });
-  },
-  // 下滑一页
-  upDown: function () {
-    var new_scrollTop = this.data.scrollTop - this.data.windowHeight
-    wx.pageScrollTo({
-      scrollTop: new_scrollTop
-    })
-    this.setData({ scrollTop: new_scrollTop });
-  },
-
+ 
   // 滚动到顶部
   onTop: function () {
     // 控制滚动
@@ -339,4 +301,49 @@ Page({
     }
   },
 
+  // 初始位置
+  scrollTouchstart: function (e) {
+    console.log("scrollTouchstart")
+    let py = e.touches[0].pageY;
+    this.setData({
+      starty: py
+    })
+  },
+  // 滑动过程中
+  scrollTouchmove: function (e) {
+    console.log("scrollTouchmove")
+    console.log("计算滑动")
+    let py = e.touches[0].pageY;
+    let d = this.data;
+    console.log("py", py, "d", d);
+    this.setData({
+      endy: py,
+    })
+    if (py - d.starty < this.data.critical && py - d.starty > -this.data.critical) {
+      this.setData({
+        margintop: py - d.starty
+      })
+    }
+  },
+  // 滑动结束
+  scrollTouchend: function (e) {
+    console.log("scrollTouchend");
+    let d = this.data;
+    if (d.endy - d.starty > this.data.critical && d.scrollindex > 0) {
+      console.log("向下翻页");
+      this.setData({
+        scrollindex: d.scrollindex - 1
+      })
+    } else if (d.endy - d.starty < -this.data.critical && d.scrollindex < this.data.totalnum - 1) {
+      console.log("向上翻页");
+      this.setData({
+        scrollindex: d.scrollindex + 1
+      })
+    }
+    this.setData({
+      starty: 0,
+      endy: 0,
+      margintop: 0
+    })
+  },
 })

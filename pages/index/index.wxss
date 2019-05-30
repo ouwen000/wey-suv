@@ -127,19 +127,18 @@
   height: 40vh !important;
 }
 
-.video {
+/* .video {
   position: absolute;
   width: 96vw;
   height: 54vw;
   top: 230vw;
-}
+} */
 
 .video-box {
   position: absolute;
-  width: 92vw;
-  left: 4vw;
-  height: 225px;
-  top: 6vh;
+  width: 96vw;
+  left: 2vw;
+  top: 25%;
 }
 .video-box video{
   width: 100%;

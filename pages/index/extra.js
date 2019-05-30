@@ -38,14 +38,15 @@ var region = {
 var infos = [
   { url: 'https://img.wenfree.cn/wey/wey_home_01.jpg', },
   { url: 'https://img.wenfree.cn/wey/1080B_02.jpg', },
-  { url: 'https://img.wenfree.cn/wey/bg-top.jpg', video: 'https://img.wenfree.cn/wey/wey_2.mp4'},
+  { url: 'https://img.wenfree.cn/wey/bg-top.jpg', video: 'https://img.wenfree.cn/wey/wey_2_1.mp4'},
   { url: 'https://img.wenfree.cn/wey/1080B_04.jpg',},
   {
     url: [
       'https://img.wenfree.cn/wey/top_silder_01.png',
       'https://img.wenfree.cn/wey/top_silder_02.png',
       'https://img.wenfree.cn/wey/top_silder_03.png'
-      ], swiper: 'true' },
+      ], swiper: 'true' 
+  },
   { 
     url: [
       'https://img.wenfree.cn/wey/hdb1.jpg',

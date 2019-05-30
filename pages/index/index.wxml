@@ -17,24 +17,25 @@
  
             src="{{item.video}}" 
             controls = "true"
-            object-fit="contain" 
-            
+            object-fit="contain"
             show-fullscreen-btn="true"
 
             >
             </video>
           </view>
 
-        <swiper wx:if="{{item.swiper}}" indicator-dots="{{true}}" indicator-color="#ffffff" autoplay="true" circular="true" 
-        
+        <swiper wx:if="{{item.swiper}}" 
+        indicator-dots="{{true}}" 
+        indicator-color="#ffffff" 
+        autoplay="true" 
+        circular="true" 
         class="swiper"
         style="height:73vw;background-color: rgba(0,0,0,1)"
         >
 
-
           <block wx:for="{{item.url}}" wx:key="row" wx:for-item="banner">
             <swiper-item style="height:73vw;">
-              <image src="{{banner}}?{{now}}" mode="widthFix" class="common-img"/>
+              <image src="{{banner}}?{{now}}" mode="scaleToFill" class="common-img"/>
             </swiper-item> 
           </block>
         </swiper>
