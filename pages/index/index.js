@@ -43,6 +43,7 @@ Page({
     now:Date.now(),
     imgUrl:'https://wenfree.cn/api/Public/idfa_xianyu/?service=Wey.Img'
   },
+  
   onLoad: function () {
     //第一时间读出图片信息
     console.log(this.data.imgUrl)
