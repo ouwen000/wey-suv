@@ -67,7 +67,6 @@ Page({
     var sysInfo = wx.getSystemInfoSync();
     console.log(sysInfo);
     this.setData({ 
-      // pageInfos: extra.dataInfos, 
       gender: extra.gender, 
       windowHeight: sysInfo.windowHeight,
       windowWidth: sysInfo.windowWidth,
