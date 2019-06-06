@@ -142,6 +142,7 @@
 }
 .video-box video{
   width: 100%;
+  object-fit: fill;
 }
 
 
@@ -182,4 +183,11 @@
   width: 40px;
   border-radius: 40px;
   background-color: white;
+}
+
+.show{
+   display:show;
+}
+.hide{
+   display:none;
 }

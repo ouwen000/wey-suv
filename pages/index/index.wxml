@@ -12,25 +12,38 @@
         <image wx:if="{{!item.swiper}}" src="{{item.url}}?{{now}}" mode="scaleToFill" class="common-img"></image>
         
           <view wx:if="{{!item.swiper&&item.video}}" class="video-box" >
-          <video 
-            wx:if="{{!item.swiper&&item.video}}" 
- 
-            src="{{item.video}}" 
-            controls = "true"
-            object-fit="contain"
-            show-fullscreen-btn="true"
+            <!-- <button   bindtap='play' >播放</button>
+            <video 
+              id='myvideo' 
+              class='{{fullScreen?"show":"hide"}}'   
+              src="{{item.video}}"  
+              autoplay="true" 
+              bindfullscreenchange="fullScreen"  
+              bindended="closeVideo"  
+              controls
+              >
+            </video> -->
+
+            <video 
+              wx:if="{{!item.swiper&&item.video}}" 
+  
+              src="{{item.video}}" 
+              controls = "true"
+              object-fit="contain"
+              show-fullscreen-btn="true"
+              bindfullscreenchange = "EventHandles"
 
             >
             </video>
           </view>
 
         <swiper wx:if="{{item.swiper}}" 
-        indicator-dots="{{true}}" 
-        indicator-color="#ffffff" 
-        autoplay="true" 
-        circular="true" 
-        class="swiper"
-        style="height:73vw;background-color: rgba(0,0,0,1)"
+          indicator-dots="{{true}}" 
+          indicator-color="#ffffff" 
+          autoplay="true" 
+          circular="true" 
+          class="swiper"
+          style="height:73vw;background-color: rgba(0,0,0,1)"
         >
 
           <block wx:for="{{item.url}}" wx:key="row" wx:for-item="banner">
