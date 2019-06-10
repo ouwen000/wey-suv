@@ -138,7 +138,7 @@
   position: absolute;
   width: 96vw;
   left: 2vw;
-  top: 25%;
+  top: 4%;
 }
 .video-box video{
   width: 100%;
