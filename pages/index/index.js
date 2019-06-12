@@ -254,15 +254,26 @@ Page({
       data: params,
       success: function(res){
         console.log("success",res);
+        // wx.showLoading({
+        //   title: '提交中',
+        // })
+        // setTimeout(function () {
+        //   wx.hideLoading()
+        // }, 2000)
         if (res.data.ret == 200 ){
           wx.showToast({
             title: '提交成功',
             icon: 'success',
             mask: true,
-            duration: 2000,
+            duration: 1500,
           });
         }else{
-          console.log("success", "fail");
+          console.log(res,"请求成功-数据失败");
+          // wx.showToast({
+          //   title: '信息不全',
+          //   icon: 'fail',
+          //   duration: 1500,
+          // })
         }
       },
       fail: function(err){
@@ -284,7 +295,7 @@ Page({
   onTop: function () {
     // 控制滚动
     wx.pageScrollTo({
-      scrollTop: wx.getSystemInfoSync().windowHeight*2*0
+      scrollTop: 0
     })
   },
 
@@ -351,8 +362,16 @@ Page({
     if (e.detail.fullScreen == false){
       console.log("取消全屏");
       // 控制滚动
+      var sysInfo = wx.getSystemInfoSync();
+      console.log(sysInfo);
+      this.setData({
+        gender: extra.gender,
+        windowHeight: sysInfo.windowHeight,
+        windowWidth: sysInfo.windowWidth,
+        lawText: extra.lawDesc
+      });
       wx.pageScrollTo({
-        scrollTop: wx.getSystemInfoSync().windowHeight + 3
+        scrollTop: wx.getSystemInfoSync().windowHeight
       })
     }
   },

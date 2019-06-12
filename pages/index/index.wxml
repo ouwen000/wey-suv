@@ -8,8 +8,8 @@
   <scroll-view class='cover' scrollX="true">
     <block wx:key="{{index}}" wx:for="{{pageInfos}}">
 
-      <view wx:if="{{!item.extra || item.extra.length==0}}" class="main-container box-mun-{{ index }}"   style='height:{{windowHeight}}px'>
-        <image wx:if="{{!item.swiper}}" src="{{item.url}}?{{now}}" mode="scaleToFill" class="common-img"></image>
+      <view wx:if="{{!item.extra || item.extra.length==0}}" class="main-container box-mun-{{ index }}"   >
+        <image wx:if="{{!item.swiper}}" src="{{item.url}}?{{now}}" mode="widthFix" class="common-img"></image>
         
           <view wx:if="{{!item.swiper&&item.video}}" class="video-box" >
             <!-- <button   bindtap='play' >播放</button>
@@ -25,6 +25,7 @@
             </video> -->
 
             <video 
+              webkit-playsinline playsinline
               wx:if="{{!item.swiper&&item.video}}" 
   
               src="{{item.video}}" 
@@ -48,7 +49,7 @@
 
           <block wx:for="{{item.url}}" wx:key="row" wx:for-item="banner">
             <swiper-item style="height:73vw;">
-              <image src="{{banner}}?{{now}}" mode="scaleToFill" class="common-img"/>
+              <image src="{{banner}}?{{now}}" mode="widthFix" class="common-img"/>
             </swiper-item> 
           </block>
         </swiper>
